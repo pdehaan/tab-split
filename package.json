@@ -1,0 +1,21 @@
+{
+  "name": "tab-split",
+  "version": "1.0.0",
+  "bugs": {
+    "url": "https://github.com/mozilla/tab-split/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "4.15.0",
+    "eslint-plugin-mozilla": "0.5.0",
+    "eslint-plugin-no-unsanitized": "2.0.2"
+  },
+  "homepage": "https://github.com/mozilla/tab-split#readme",
+  "keywords": [],
+  "license": "MPL-2.0",
+  "repository": "mozilla/tab-split",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "npm run lint"
+  }
+}

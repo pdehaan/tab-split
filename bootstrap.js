@@ -15,8 +15,8 @@ XPCOMUtils.defineLazyModuleGetter(this, "Services", "resource://gre/modules/Serv
 
 const startupObserver = {
   register() {
-    Services.obs.addObserver(this, "sessionstore-windows-restored", false);
-    Services.obs.addObserver(this, "browser-delayed-startup-finished", false);
+    Services.obs.addObserver(this, "sessionstore-windows-restored");
+    Services.obs.addObserver(this, "browser-delayed-startup-finished");
   },
 
   unregister() {
@@ -37,7 +37,7 @@ const TabSplit = {
   onNewBrowserCreated() {
     console.log("TMP > TabSplit - bootstrap - onNewBrowserCreated");
 
-    let WM = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator);
+    let WM = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     let chromeWindow = WM.getMostRecentWindow("navigator:browser");
     let tabbrowser = chromeWindow.document.getElementById("content");
     if (tabbrowser.getAttribute("data-tabsplit-tabbrowser-id")) {
@@ -53,7 +53,7 @@ const TabSplit = {
 
   onDestroy() {
     console.log("TMP > TabSplit - bootstrap - onDestroy");
-    let WM = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator);
+    let WM = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     let chromeWindows = WM.getEnumerator("navigator:browser");
     while (chromeWindows.hasMoreElements()) {
       let win = chromeWindows.getNext();
@@ -80,7 +80,7 @@ function startup(data, reason) {
 function shutdown(data, reason) {
   console.log("TMP> TabSplit shutdown with reason =", reason);
   startupObserver.unregister();
-  if (reason != APP_SHUTDOWN) {
+  if (reason !== APP_SHUTDOWN) {
     console.log("TMP> TabSplit shutdown to destroy");
     TabSplit.onDestroy();
   }
